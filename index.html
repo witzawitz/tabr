@@ -2,34 +2,29 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'moz-extension' https://*.jquery.com">
-		<link href="https://fonts.googleapis.com/css?family=Exo+2:300,300i,400,400i,600&amp;subset=cyrillic" rel="stylesheet">
-		<link rel="stylesheet" href="tabr.css">
-		<script src="node_modules/jquery/dist/jquery.min.js"></script>
-		<script src="node_modules/lodash/lodash.min.js"></script>
-		<script src="node_modules/gridstack/dist/gridstack.all.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/jquery-ui.min.css">
+		<link rel="stylesheet" href="css/gridstack.min.css">
+		<link rel="stylesheet" href="css/tabr.min.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/lodash.min.js"></script>
+		<script src="js/gridstack.all.js"></script>
+		<script src="js/tabr.js"></script>
 	</head>
 	<body>
-		<div class="grid-stack">
-			<div class="grid-stack-item"
-				data-gs-x="0" data-gs-y="0"
-				data-gs-width="4" data-gs-height="2">
-				<div class="grid-stack-item-content"></div>
+		<div class="container-fluid">
+			<h1>Float grid demo</h1>
+
+			<div>
+				<a class="btn btn-default" id="add-new-widget" href="#">Add Widget</a>
 			</div>
-			<div class="grid-stack-item"
-				data-gs-x="4" data-gs-y="0"
-				data-gs-width="4" data-gs-height="4">
-				<div class="grid-stack-item-content"></div>
+
+			<br/>
+
+			<div class="grid-stack">
 			</div>
 		</div>
-		<script>
-			$(function () {
-				var options = {
-					cellHeight     : 80,
-					verticalMargin : 10
-				};
-				$('.grid-stack').gridstack(options);
-			});
-		</script>
 	</body>
 </html>

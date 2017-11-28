@@ -14,5 +14,16 @@
 		"gecko": {
 			"id": "tabr@witzawitz.com"
 		}
+	},
+	"background": {
+		"page": "index.html",
+		"scripts": [
+			"js/bootstrap.min.js",
+			"js/jquery.min.js",
+			"js/jquery-ui.min.js",
+			"js/lodash.min.js",
+			"js/gridstack.all.js",
+			"js/tabr.js"
+		]
 	}
 }
