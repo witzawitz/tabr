@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'moz-extension' https://*.jquery.com">
+		<link href="https://fonts.googleapis.com/css?family=Exo+2:300,300i,400,400i,600&amp;subset=cyrillic" rel="stylesheet">
+		<link rel="stylesheet" href="tabr.css">
+		<script src="node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="node_modules/lodash/lodash.min.js"></script>
+		<script src="node_modules/gridstack/dist/gridstack.all.js"></script>
+	</head>
+	<body>
+		<div class="grid-stack">
+			<div class="grid-stack-item"
+				data-gs-x="0" data-gs-y="0"
+				data-gs-width="4" data-gs-height="2">
+				<div class="grid-stack-item-content"></div>
+			</div>
+			<div class="grid-stack-item"
+				data-gs-x="4" data-gs-y="0"
+				data-gs-width="4" data-gs-height="4">
+				<div class="grid-stack-item-content"></div>
+			</div>
+		</div>
+		<script>
+			$(function () {
+				var options = {
+					cellHeight     : 80,
+					verticalMargin : 10
+				};
+				$('.grid-stack').gridstack(options);
+			});
+		</script>
+	</body>
+</html>

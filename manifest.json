@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "Tabr",
+	"version": "0.1",
+	"description": "Adds thumbnails for the home page.",
+	"icons": {
+		"48": "icons/logo-48.png",
+		"96": "icons/logo-96.png"
+	},
+	"chrome_url_overrides": {
+		"newtab": "index.html"
+	},
+	"applications": {
+		"gecko": {
+			"id": "tabr@witzawitz.com"
+		}
+	}
+}
