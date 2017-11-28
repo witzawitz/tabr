@@ -25,7 +25,7 @@ $(function () {
 					width  : 1 + 3 * Math.random(),
 					height : 1 + 3 * Math.random()
 				};
-			this.grid.addWidget($('<div><div class="grid-stack-item-content" /><div/>'),
+			this.grid.addWidget($('<div><div class="grid-stack-item-content">123</div></div>'),
 				node.x, node.y, node.width, node.height);
 			return false;
 		}.bind(this);
