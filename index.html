@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/jquery-ui.min.css">
 		<link rel="stylesheet" href="css/gridstack.min.css">
 		<link rel="stylesheet" href="css/tabr.min.css">
@@ -14,15 +15,12 @@
 		<script src="js/tabr.js"></script>
 	</head>
 	<body>
-		<div class="container-fluid">
-			<h1>Float grid demo</h1>
-
-			<div>
-				<a class="btn btn-default" id="add-new-widget" href="#">Add Widget</a>
-			</div>
-
-			<br/>
-
+		<div id="tabr-manage" data-mode="view">
+			<button class="btn btn-default" id="tabr-edit"><i class="fa fa-pencil"></i></button>
+			<button class="btn btn-default hidden" id="tabr-add"><i class="fa fa-plus"></i></button>
+			<button class="btn btn-default hidden" id="tabr-cancel"><i class="fa fa-ban"></i></button>
+		</div>
+		<div class="container-fluid" id="tabr-container">
 			<div class="grid-stack">
 			</div>
 		</div>

@@ -16,6 +16,18 @@ module.exports = function (grunt) {
 					}
 				]
 			},
+			fa     : {
+				files : [
+					{
+						expand  : true,
+						flatten : true,
+						src     : [
+							'node_modules/font-awesome/fonts/*'
+						],
+						dest    : '../font/font-awesome/'
+					}
+				]
+			},
 			js_lib : {
 				files : [
 					{
@@ -46,6 +58,16 @@ module.exports = function (grunt) {
 			}
 		},
 		less  : {
+			fa   : {
+				options : {
+					paths        : [ "node_modules" ],
+					cleancss     : true,
+					compress     : true,
+					yuicompress  : true,
+					optimization : 2
+				},
+				files   : { "../css/font-awesome.min.css" : "less/font-awesome.less" }
+			},
 			tabr : {
 				options : {
 					paths        : [ "node_modules" ],
