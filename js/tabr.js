@@ -61,28 +61,22 @@ $(function () {
 		_grid       : null,
 		_data       : [],
 		_widgetHtml : '<div><div class="grid-stack-item-content"><div class="tabr-block"><div class="tabr-header"><div class="tabr-favicon"></div><div class="tabr-title"></div><div class="tabr-manage"></div></div><div class="tabr-content"></div><div class="tabr-footer"></div></div></div></div>',
-
-		add  : function (x, y, w, h, url, title) {
-			// var item = {
-			// 	id    : srandom(),
-			// 	x     : x,
-			// 	y     : y,
-			// 	w     : w,
-			// 	h     : h,
-			// 	url   : url,
-			// 	title : title
-			// };
-			// this._data.push(item);
-			var node = {
-				x      : 12 * Math.random(),
-				y      : 5 * Math.random(),
-				width  : 1 + 3 * Math.random(),
-				height : 1 + 3 * Math.random()
-			};
-			this._grid.addWidget($(this._widgetHtml), node.x, node.y, node.width, node.height);
+		add         : function (url, title) {
+			var w = $(this._widgetHtml);
+			w.find(".tabr-title").html(title);
+			var b = w.find(".tabr-block");
+			b.data("id", srandom());
+			b.data("url", url);
+			b.on("click", function () {
+				var mode = $("#tabr-manage").data("mode");
+				if (mode === "view") {
+					console.log($(this).data("url"));
+				}
+			});
+			this._grid.addWidget(w, 0, 0, 2, 2, true);
 			return false;
 		},
-		init : function () {
+		init        : function () {
 			var e = $("#tabr-container>.grid-stack");
 			e.gridstack({
 				float : true
@@ -95,7 +89,22 @@ $(function () {
 	$("#tabr-edit, #tabr-cancel").click(function () {
 		toggleMode();
 	});
-	$("#tabr-add").click(function () {
-		Collection.add();
+	$("#tabr-form-save").click(function () {
+		Collection.add($("#tabr-form-url").val(), $("#tabr-form-title").val());
+		$("#tabr-modal").modal("hide");
+		$("#tabr-form-title").val("");
+		$("#tabr-form-url").val("");
+		$("#tabr-form-save").attr("disabled", "disabled");
+	});
+	$("#tabr-form-title, #tabr-form-url").on("keyup change", function () {
+		var enable = true;
+		$("#tabr-modal input").each(function () {
+			if ($(this).val().length === 0)
+				enable = false;
+		});
+		if (enable)
+			$("#tabr-form-save").removeAttr("disabled");
+		else
+			$("#tabr-form-save").attr("disabled", "disabled");
 	});
 });

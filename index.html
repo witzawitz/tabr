@@ -17,11 +17,44 @@
 	<body>
 		<div id="tabr-manage" data-mode="view">
 			<button class="btn btn-default" id="tabr-edit"><i class="fa fa-pencil"></i></button>
-			<button class="btn btn-default hidden" id="tabr-add"><i class="fa fa-plus"></i></button>
+			<button class="btn btn-default hidden" id="tabr-add" data-toggle="modal" data-target="#tabr-modal">
+				<i class="fa fa-plus"></i></button>
 			<button class="btn btn-default hidden" id="tabr-cancel"><i class="fa fa-ban"></i></button>
 		</div>
 		<div class="container-fluid" id="tabr-container">
 			<div class="grid-stack">
+			</div>
+		</div>
+		<div class="modal fade" tabindex="-1" role="dialog" id="tabr-modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Add new item</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-horizontal">
+							<div class="form-group">
+								<label for="tabr-form-url" class="control-label col-sm-3">URL</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="tabr-form-url" type="url" maxlength="255" minlength="1" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="tabr-form-title" class="control-label col-sm-3">Title</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="tabr-form-title" type="text" maxlength="50" minlength="1">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="tabr-form-save" disabled="disabled">Save</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
