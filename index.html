@@ -7,19 +7,15 @@
 		<link rel="stylesheet" href="css/jquery-ui.min.css">
 		<link rel="stylesheet" href="css/gridstack.min.css">
 		<link rel="stylesheet" href="css/tabr.min.css">
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery-ui.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/lodash.min.js"></script>
-		<script src="js/gridstack.all.js"></script>
-		<script src="js/tabr.js"></script>
+		<title>TABR</title>
+		<link rel="shortcut icon" href="icons/logo-48.png">
 	</head>
 	<body>
 		<div id="tabr-manage" data-mode="view">
-			<button class="btn btn-default" id="tabr-edit"><i class="fa fa-pencil"></i></button>
-			<button class="btn btn-default hidden" id="tabr-add" data-toggle="modal" data-target="#tabr-modal">
+			<button class="btn btn-warning" id="tabr-edit"><i class="fa fa-pencil"></i></button>
+			<button class="btn btn-success hidden" id="tabr-add" data-toggle="modal" data-target="#tabr-modal">
 				<i class="fa fa-plus"></i></button>
-			<button class="btn btn-default hidden" id="tabr-cancel"><i class="fa fa-ban"></i></button>
+			<button class="btn btn-primary hidden" id="tabr-save"><i class="fa fa-check"></i></button>
 		</div>
 		<div class="container-fluid" id="tabr-container">
 			<div class="grid-stack">
@@ -57,5 +53,28 @@
 				</div>
 			</div>
 		</div>
+		<div class="hide" id="tabr-item">
+			<div>
+				<div class="grid-stack-item-content">
+					<div class="tabr-block">
+						<div class="tabr-header">
+							<div class="tabr-favicon"></div>
+							<div class="tabr-title"></div>
+							<div class="tabr-manage"></div>
+						</div>
+						<div class="tabr-content"></div>
+						<div class="tabr-footer">
+							<div class="tabr-url"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/lodash.min.js"></script>
+		<script src="js/gridstack.all.js"></script>
+		<script src="js/tabr.js"></script>
 	</body>
 </html>

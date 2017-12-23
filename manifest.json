@@ -25,5 +25,10 @@
 			"js/gridstack.all.js",
 			"js/tabr.js"
 		]
-	}
+	},
+	"permissions": [
+		"bookmarks",
+		"history",
+		"storage"
+	]
 }

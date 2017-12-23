@@ -1,27 +1,4 @@
 $(function () {
-	// var options = {
-	// 	float : true
-	// };
-	// $('.grid-stack').gridstack(options);
-	//
-	// new function () {
-	// 	this.grid = $('.grid-stack').data('gridstack');
-	//
-	// 	this.addNewWidget = function () {
-	// 		var node = {
-	// 			x      : 12 * Math.random(),
-	// 			y      : 5 * Math.random(),
-	// 			width  : 1 + 3 * Math.random(),
-	// 			height : 1 + 3 * Math.random()
-	// 		};
-	// 		this.grid.addWidget($('<div><div class="grid-stack-item-content">123</div></div>'),
-	// 			node.x, node.y, node.width, node.height);
-	// 		return false;
-	// 	}.bind(this);
-	//
-	// 	$('#tabr-add').click(this.addNewWidget);
-	// };
-
 	rand = function (min, max) {
 		return Math.round(Math.random() * (max - min) + min);
 	};
@@ -43,27 +20,29 @@ $(function () {
 			m.data("mode", "edit");
 			$("#tabr-edit").addClass("hidden");
 			$("#tabr-add").removeClass("hidden");
-			$("#tabr-cancel").removeClass("hidden");
+			$("#tabr-save").removeClass("hidden");
 			$('#tabr-container').addClass("active");
-			Collection._grid.enable();
+			TABR._grid.enable();
 		}
 		else {
 			m.data("mode", "view");
 			$("#tabr-edit").removeClass("hidden");
 			$("#tabr-add").addClass("hidden");
-			$("#tabr-cancel").addClass("hidden");
+			$("#tabr-save").addClass("hidden");
 			$('#tabr-container').removeClass("active");
-			Collection._grid.disable();
+			TABR._grid.disable();
 		}
 	};
 
-	var Collection = {
+	var TABR = {
 		_grid       : null,
 		_data       : [],
-		_widgetHtml : '<div><div class="grid-stack-item-content"><div class="tabr-block"><div class="tabr-header"><div class="tabr-favicon"></div><div class="tabr-title"></div><div class="tabr-manage"></div></div><div class="tabr-content"></div><div class="tabr-footer"></div></div></div></div>',
+		_storage    : browser.storage.sync,
+		_widgetHtml : $("#tabr-item").html(),
 		add         : function (url, title) {
 			var w = $(this._widgetHtml);
 			w.find(".tabr-title").html(title);
+			w.find(".tabr-url").html(url);
 			var b = w.find(".tabr-block");
 			b.data("id", srandom());
 			b.data("url", url);
@@ -84,13 +63,13 @@ $(function () {
 			this._grid = e.data('gridstack');
 		}
 	};
-	Collection.init();
+	TABR.init();
 
-	$("#tabr-edit, #tabr-cancel").click(function () {
+	$("#tabr-edit, #tabr-save").click(function () {
 		toggleMode();
 	});
 	$("#tabr-form-save").click(function () {
-		Collection.add($("#tabr-form-url").val(), $("#tabr-form-title").val());
+		TABR.add($("#tabr-form-url").val(), $("#tabr-form-title").val());
 		$("#tabr-modal").modal("hide");
 		$("#tabr-form-title").val("");
 		$("#tabr-form-url").val("");
