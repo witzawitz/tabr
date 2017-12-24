@@ -61,7 +61,7 @@ $(document).ready(function () {
 			b.on("click", function () {
 				var mode = $("#tabr-manage").data("mode");
 				if (mode === "view") {
-					console.log($(this).data("url"));
+					window.location = $(this).data("url");
 				}
 			});
 			this._grid.addWidget(w, item.x, item.y, item.width, item.height, auto, 1, 2, 1, 2, item.id);
@@ -90,9 +90,11 @@ $(document).ready(function () {
 			});
 			this._grid = e.data('gridstack');
 			this._storage.get("data").then(function (item) {
-				var data = item.data;
-				for (var i = 0; i < data.length; i++)
-					TABR.add(data[ i ].url, data[ i ].title, data[ i ].width, data[ i ].height, data[ i ].x, data[ i ].y);
+				if (typeof item.data !== "undefined") {
+					var data = item.data;
+					for (var i = 0; i < data.length; i++)
+						TABR.add(data[ i ].url, data[ i ].title, data[ i ].width, data[ i ].height, data[ i ].x, data[ i ].y);
+				}
 			});
 		}
 	};
@@ -111,7 +113,7 @@ $(document).ready(function () {
 	$("#tabr-form-title, #tabr-form-url").on("keyup change", function () {
 		var enable = true;
 		$("#tabr-modal input").each(function () {
-			if ($(this).val().length === 0)
+			if ($(this).val().length === 0 || !$(this)[ 0 ].checkValidity())
 				enable = false;
 		});
 		if (enable)

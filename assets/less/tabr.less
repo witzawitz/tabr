@@ -38,11 +38,23 @@ body
 	z-index: 100;
 }
 
+#tabr-modal
+{
+	input[type="text"], input[type="url"]
+	{
+		&:invalid
+		{
+			border: 1px solid red;
+		}
+	}
+}
+
 .tabr-block
 {
 	background-color: @color-green;
 	border-radius: 1px;
 	bottom: 0;
+	cursor: pointer;
 	left: 0;
 	position: absolute;
 	right: 0;
