@@ -102,12 +102,17 @@ $(document).ready(function () {
 			return null;
 		},
 		_makeScreenshot  : function (url) {
-			var frame = $("<div/>").addClass("tabr-iframe-screenshot").load(url);
-			$("body").append(frame);
-			frame.ready(function () {
-				var size = Math.min(1200, Math.max(400, parseInt(frame.css("width"))));
-				frame.css("width", size + "px").css("height", size + "px");
-				frame.attr("width", size).attr("height", size);
+			var link = "https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=" + url + "&screenshot=true&callback=?";
+			$.getJSON(link, function (json) {
+				if (typeof json.screenshot !== "undefined" && typeof json.screenshot.data !== "undefined") {
+					var t = json.screenshot.mime_type;
+					var b = json.screenshot.data.replace(/_/g, "/").replace(/\-/g, "+");
+					$("body").append($("<img/>").attr("src", "data:" + t + ";base64," + b));
+				}
+			}).fail(function (a, b, c) {
+				console.log(a);
+				console.log(b);
+				console.log(c);
 			});
 		}
 	};
@@ -140,10 +145,4 @@ $(document).ready(function () {
 	});
 
 	TABR._makeScreenshot("https://mipt.lectoriy.ru");
-
-	setTimeout(function () {
-		html2canvas($("body")[ 0 ]).then(function (canvas) {
-			$("body").append(canvas);
-		});
-	}, 5000);
 });

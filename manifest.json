@@ -23,5 +23,5 @@
 		"history",
 		"storage"
 	],
-	"content_security_policy": "default-src * 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; object-src https://mipt.lectoriy.ru 'self'; img-src 'self' data:; child-src *"
+	"content_security_policy": "default-src * 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' https://www.googleapis.com; object-src 'self'; img-src 'self' data:; child-src *"
 }
