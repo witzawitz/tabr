@@ -18,12 +18,15 @@
   "homepage": "https://github.com/witzawitz/tabr#readme",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "dexie": "^2.0.1",
     "font-awesome": "^4.7.0",
     "gridstack": "^0.3.0",
     "grunt": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-watch": "^1.0.0",
+    "html2canvas": "^1.0.0-alpha.5",
+    "iframe2image": "^0.2.1",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4"
   }

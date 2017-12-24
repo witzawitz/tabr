@@ -38,7 +38,9 @@ module.exports = function (grunt) {
 							'node_modules/jquery/dist/jquery.min.js',
 							'node_modules/lodash/lodash.min.js',
 							'node_modules/gridstack/dist/gridstack.all.js',
-							'node_modules/bootstrap/dist/js/bootstrap.min.js'
+							'node_modules/bootstrap/dist/js/bootstrap.min.js',
+							'node_modules/dexie/dist/dexie.min.js',
+							'node_modules/html2canvas/dist/html2canvas.min.js'
 						],
 						dest    : '../js/'
 					}

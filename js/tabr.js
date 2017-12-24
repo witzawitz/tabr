@@ -35,11 +35,12 @@ $(document).ready(function () {
 	};
 
 	var TABR = {
-		_grid           : null,
-		_data           : [],
-		_storage        : browser.storage.sync,
-		_widgetHtml     : $("#tabr-item").html().replace(/[\n|\t]/g, ""),
-		add             : function (url, title, width, height, x, y) {
+		_grid            : null,
+		_data            : [],
+		_db              : null,
+		_storage         : browser.storage.sync,
+		_widgetHtml      : $("#tabr-item").html().replace(/[\n|\t]/g, ""),
+		add              : function (url, title, width, height, x, y) {
 			var item = {
 				id     : srandom(),
 				title  : title,
@@ -65,7 +66,7 @@ $(document).ready(function () {
 				}
 			});
 			this._grid.addWidget(w, item.x, item.y, item.width, item.height, auto, 1, 2, 1, 2, item.id);
-			var node    = this.getGridNodeById(item.id);
+			var node    = this._getGridNodeById(item.id);
 			item.height = node.height;
 			item.width  = node.width;
 			item.x      = node.x;
@@ -76,25 +77,37 @@ $(document).ready(function () {
 			});
 			return false;
 		},
-		getGridNodeById : function (id) {
-			var nodes = this._grid.grid.nodes;
-			for (var i = 0; i < nodes.length; i++)
-				if (nodes[ i ].id === id)
-					return nodes[ i ];
-			return null;
-		},
-		init            : function () {
+		init             : function () {
 			var e = $("#tabr-container>.grid-stack");
 			e.gridstack({
 				float : true
 			});
 			this._grid = e.data('gridstack');
+
 			this._storage.get("data").then(function (item) {
 				if (typeof item.data !== "undefined") {
 					var data = item.data;
 					for (var i = 0; i < data.length; i++)
 						TABR.add(data[ i ].url, data[ i ].title, data[ i ].width, data[ i ].height, data[ i ].x, data[ i ].y);
 				}
+			});
+
+			this._db = new Dexie("Tabr");
+		},
+		_getGridNodeById : function (id) {
+			var nodes = this._grid.grid.nodes;
+			for (var i = 0; i < nodes.length; i++)
+				if (nodes[ i ].id === id)
+					return nodes[ i ];
+			return null;
+		},
+		_makeScreenshot  : function (url) {
+			var frame = $("<div/>").addClass("tabr-iframe-screenshot").load(url);
+			$("body").append(frame);
+			frame.ready(function () {
+				var size = Math.min(1200, Math.max(400, parseInt(frame.css("width"))));
+				frame.css("width", size + "px").css("height", size + "px");
+				frame.attr("width", size).attr("height", size);
 			});
 		}
 	};
@@ -125,4 +138,12 @@ $(document).ready(function () {
 		else
 			$("#tabr-form-save").attr("disabled", "disabled");
 	});
+
+	TABR._makeScreenshot("https://mipt.lectoriy.ru");
+
+	setTimeout(function () {
+		html2canvas($("body")[ 0 ]).then(function (canvas) {
+			$("body").append(canvas);
+		});
+	}, 5000);
 });

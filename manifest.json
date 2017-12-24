@@ -16,19 +16,12 @@
 		}
 	},
 	"background": {
-		"page": "index.html",
-		"scripts": [
-			"js/bootstrap.min.js",
-			"js/jquery.min.js",
-			"js/jquery-ui.min.js",
-			"js/lodash.min.js",
-			"js/gridstack.all.js",
-			"js/tabr.js"
-		]
+		"page": "index.html"
 	},
 	"permissions": [
 		"bookmarks",
 		"history",
 		"storage"
-	]
+	],
+	"content_security_policy": "default-src * 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; object-src https://mipt.lectoriy.ru 'self'; img-src 'self' data:; child-src *"
 }
