@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
 	rand = function (min, max) {
 		return Math.round(Math.random() * (max - min) + min);
 	};
@@ -35,32 +35,65 @@ $(function () {
 	};
 
 	var TABR = {
-		_grid       : null,
-		_data       : [],
-		_storage    : browser.storage.sync,
-		_widgetHtml : $("#tabr-item").html(),
-		add         : function (url, title) {
+		_grid           : null,
+		_data           : [],
+		_storage        : browser.storage.sync,
+		_widgetHtml     : $("#tabr-item").html().replace(/[\n|\t]/g, ""),
+		add             : function (url, title, width, height, x, y) {
+			var item = {
+				id     : srandom(),
+				title  : title,
+				url    : url,
+				width  : width || 2,
+				height : height || 2,
+				x      : x || 0,
+				y      : y || 0
+			};
+			var auto = !(width && height && x && y) || true;
+
 			var w = $(this._widgetHtml);
-			w.find(".tabr-title").html(title);
-			w.find(".tabr-url").html(url);
+			w.find(".tabr-title").html(item.title);
+			w.find(".tabr-url").html(item.url);
+
 			var b = w.find(".tabr-block");
-			b.data("id", srandom());
-			b.data("url", url);
+			b.data("id", item.id);
+			b.data("url", item.url);
 			b.on("click", function () {
 				var mode = $("#tabr-manage").data("mode");
 				if (mode === "view") {
 					console.log($(this).data("url"));
 				}
 			});
-			this._grid.addWidget(w, 0, 0, 2, 2, true);
+			this._grid.addWidget(w, item.x, item.y, item.width, item.height, auto, 1, 2, 1, 2, item.id);
+			var node    = this.getGridNodeById(item.id);
+			item.height = node.height;
+			item.width  = node.width;
+			item.x      = node.x;
+			item.y      = node.y;
+			this._data.push(item);
+			this._storage.set({
+				data : this._data
+			});
 			return false;
 		},
-		init        : function () {
+		getGridNodeById : function (id) {
+			var nodes = this._grid.grid.nodes;
+			for (var i = 0; i < nodes.length; i++)
+				if (nodes[ i ].id === id)
+					return nodes[ i ];
+			return null;
+		},
+		init            : function () {
 			var e = $("#tabr-container>.grid-stack");
 			e.gridstack({
 				float : true
 			});
 			this._grid = e.data('gridstack');
+			this._storage.get("data").then(function (item) {
+				var data = item.data;
+				for (var i = 0; i < data.length; i++)
+					TABR.add(data[ i ].url, data[ i ].title, data[ i ].width, data[ i ].height, data[ i ].x, data[ i ].y);
+			});
 		}
 	};
 	TABR.init();
