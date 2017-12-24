@@ -113,8 +113,12 @@ $(document).ready(function () {
 	$("#tabr-form-title, #tabr-form-url").on("keyup change", function () {
 		var enable = true;
 		$("#tabr-modal input").each(function () {
-			if ($(this).val().length === 0 || !$(this)[ 0 ].checkValidity())
+			if ($(this).val().length === 0)
 				enable = false;
+			if (!$(this)[ 0 ].checkValidity()) {
+				enable = false;
+				$(this)[ 0 ].reportValidity();
+			}
 		});
 		if (enable)
 			$("#tabr-form-save").removeAttr("disabled");
